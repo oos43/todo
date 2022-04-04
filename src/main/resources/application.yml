@@ -7,9 +7,9 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
-      hibername:
+      hibernate:
         format_sql: true
 
 logging.level:

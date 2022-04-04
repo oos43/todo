@@ -1,69 +1,39 @@
 package com.project.todo.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member implements UserDetails {
+public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "member_no")
     private Long no;
 
+    @Column(name = "id", unique = true)
     private String id;
+
     private String password;
     private String nickname;
-    private String email;
+    //private String email;
 
-    @Enumerated(EnumType.STRING)
-    private MemberStatus status;
+    //@Enumerated(EnumType.STRING)
+    //private MemberStatus status;
 
-    @Builder
-    public Member(String id, String password, String nickname, String email) {
+    private String auth;
+
+
+    public Member(String id, String password, String nickname, String auth) {
         this.id = id;
         this.password = password;
         this.nickname = nickname;
-        this.email = email;
+        this.auth = auth;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return id;
-    }
-
-
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

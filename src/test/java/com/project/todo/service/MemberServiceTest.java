@@ -29,7 +29,7 @@ public class MemberServiceTest {
         Member member = new Member("testId", "testPassword", "testNickname", "test@email.com");
 
         //when
-        Long saveNo = memberService.join(member);
+        Long saveNo = memberService.save(member);
 
         //then
         em.flush();
@@ -43,8 +43,8 @@ public class MemberServiceTest {
         Member member2 = new Member("testId", "testPassword", "testNickname", "test@email.com");
 
         //when
-        memberService.join(member1);
-        memberService.join(member2);
+        memberService.save(member1);
+        memberService.save(member2);
 
         //then
         fail("예외가 발생해야 한다");
@@ -54,7 +54,7 @@ public class MemberServiceTest {
     public void 로그인() throws Exception {
         //given
         Member member = new Member("testId", "testPassword", "testNickname", "test@email.com");
-        memberService.join(member);
+        memberService.save(member);
 
         //when
         Member loginMember = memberService.login(member.getId(), member.getPassword());

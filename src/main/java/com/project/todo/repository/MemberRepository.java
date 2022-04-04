@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import java.util.List;
+import javax.persistence.TypedQuery;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,10 +17,10 @@ public class MemberRepository {
         em.persist(member);
     }
 
-    public List<Member> findById(String id) {
-        return em.createQuery("select m from Member m where m.id = :id", Member.class)
-                .setParameter("id", id)
-                .getResultList();
+    public Member findById(String id) {
+        TypedQuery<Member> query = em.createQuery("select m from Member as m where m.id = ?1", Member.class)
+                .setParameter(1, id);
+        return query.getSingleResult();
     }
 
     public Member findOne(Long no) {

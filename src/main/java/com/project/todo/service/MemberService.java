@@ -15,6 +15,7 @@ public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     @Override
     public MemberDetail loadUserByUsername(String id) throws UsernameNotFoundException {
          Member member = memberRepository.findById(id);
@@ -37,9 +38,5 @@ public class MemberService implements UserDetailsService {
     }
 */
 
-    public Member login(String id, String password) {
-        Member member = memberRepository.findById(id);
 
-        return member;
-    }
 }

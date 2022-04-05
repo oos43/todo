@@ -50,17 +50,4 @@ public class MemberServiceTest {
         fail("예외가 발생해야 한다");
     }
 
-    @Test
-    public void 로그인() throws Exception {
-        //given
-        Member member = new Member("testId", "testPassword", "testNickname", "test@email.com");
-        memberService.save(member);
-
-        //when
-        Member loginMember = memberService.login(member.getId(), member.getPassword());
-
-        //then
-        em.flush();
-        assertEquals(member, memberRepository.findOne(loginMember.getNo()));
-    }
 }

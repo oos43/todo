@@ -16,7 +16,6 @@ public class Member {
     @Column(name = "member_no")
     private Long no;
 
-    @Column(name = "id", unique = true)
     private String id;
 
     private String password;
@@ -28,6 +27,7 @@ public class Member {
 
     private String auth;
 
+    public Member() {}
 
     public Member(String id, String password, String nickname, String auth) {
         this.id = id;

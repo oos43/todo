@@ -18,8 +18,8 @@ public class MemberRepository {
     }
 
     public Member findById(String id) {
-        TypedQuery<Member> query = em.createQuery("select m from Member as m where m.id = ?1", Member.class)
-                .setParameter(1, id);
+        TypedQuery<Member> query = em.createQuery("select m from Member m where m.id = :id", Member.class)
+                .setParameter("id", id);
         return query.getSingleResult();
     }
 

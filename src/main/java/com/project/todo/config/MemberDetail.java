@@ -1,5 +1,6 @@
-package com.project.todo.domain;
+package com.project.todo.config;
 
+import com.project.todo.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,7 +1,7 @@
 package com.project.todo.service;
 
 import com.project.todo.domain.Member;
-import com.project.todo.domain.MemberDetail;
+import com.project.todo.config.MemberDetail;
 import com.project.todo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;

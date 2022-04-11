@@ -1,9 +1,14 @@
 package com.project.todo.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import static com.project.todo.domain.TodoStatus.Y;
 
 @Entity
 @Getter
@@ -14,7 +19,7 @@ public class Todo {
     private Long no;
 
     private String content;
-    private LocalDateTime date;
+    private LocalDate date;
 
     @Enumerated(EnumType.STRING)
     private TodoStatus status;
@@ -23,8 +28,20 @@ public class Todo {
     @JoinColumn(name = "member_no")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_no")
     private Category category;
 
+    private Todo(String content, LocalDate date, TodoStatus status, Member member, Category category) {
+        this.content = content;
+        this.date = date;
+        this.status = status;
+        this.member = member;
+        this.category = category;
+    }
+
+    public static Todo createTodo(String content, LocalDate date, Member member, Category category) {
+        Todo todo = new Todo(content, date, Y, member, category);
+        return todo;
+    }
 }

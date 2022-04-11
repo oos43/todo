@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
-    @Transactional
+
     @Override
     public MemberDetail loadUserByUsername(String id) throws UsernameNotFoundException {
          Member member = memberRepository.findById(id);
          return new MemberDetail(member);
     }
 
-    @Transactional
     public Long save(Member member) {
         //validateDuplicateId(member);
         memberRepository.save(member);

@@ -20,13 +20,13 @@ public class MemberController {
     @GetMapping("/signUp")
     public String showSignUpForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
-        return "view/signUpForm";
+        return "view/signUp";
     }
 
     @PostMapping("/signUp")
     public String signUp(@Valid MemberForm form, BindingResult result) {
         if (result.hasErrors()) {
-            return "view/signUpForm";
+            return "view/signUp";
         }
 
         Member member = new Member(form.getId(), form.getPassword(), form.getNickname(), "USER");

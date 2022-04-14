@@ -10,4 +10,7 @@ public class TodoController {
     public String showTodo() {
         return "view/todo";
     }
+
+    @GetMapping("/todolist/new")
+    public String addTodo() { return "view/createTodo"; }
 }

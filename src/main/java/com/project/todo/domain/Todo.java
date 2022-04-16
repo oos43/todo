@@ -1,12 +1,9 @@
 package com.project.todo.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static com.project.todo.domain.TodoStatus.Y;
 

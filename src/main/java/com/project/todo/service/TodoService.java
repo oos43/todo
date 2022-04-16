@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -22,5 +24,13 @@ public class TodoService {
     public Long saveCategory(Category category) {
         todoRepository.saveCategory(category);
         return category.getNo();
+    }
+
+    public List<Category> findCategories(Long memberNo) {
+        return todoRepository.findCategories(memberNo);
+    }
+
+    public Category findCategory(Long no) {
+        return todoRepository.findCategory(no);
     }
 }

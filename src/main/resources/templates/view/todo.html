@@ -59,6 +59,10 @@
                     <div class="card-body">
                         <div>
                             Todo List
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Create Category
+                            </button>
                             <a href="/todolist/new" class="btn btn-neutral btn-icon">
                                 <span class="btn-inner--icon">
                                   <i class="fa fa-cloud-download mr-2"></i>
@@ -159,6 +163,37 @@
 <script src="../assets/vendor/headroom/headroom.min.js"></script>
 <!-- Argon JS -->
 <script src="../assets/js/argon.js?v=1.0.0"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/categories/new" method="post" role="form">
+                <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Category" type="text" name="name">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 
 </html>

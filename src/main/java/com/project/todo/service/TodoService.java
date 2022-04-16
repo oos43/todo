@@ -5,8 +5,10 @@ import com.project.todo.domain.Todo;
 import com.project.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TodoService {
 

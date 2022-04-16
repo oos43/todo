@@ -1,7 +1,7 @@
 package com.project.todo.service;
 
-import com.project.todo.domain.Member;
 import com.project.todo.config.MemberDetail;
+import com.project.todo.domain.Member;
 import com.project.todo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +16,6 @@ public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
-
     @Override
     public MemberDetail loadUserByUsername(String id) throws UsernameNotFoundException {
          Member member = memberRepository.findById(id);
@@ -28,8 +27,8 @@ public class MemberService implements UserDetailsService {
         memberRepository.save(member);
         return member.getNo();
     }
-/*
 
+/*
     private void validateDuplicateId(Member member) {
         List<Member> findMembers = memberRepository.findById(member.getId());
         if(!findMembers.isEmpty()) {
@@ -37,6 +36,4 @@ public class MemberService implements UserDetailsService {
         }
     }
 */
-
-
 }

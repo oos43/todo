@@ -1,11 +1,13 @@
 package com.project.todo.service;
 
 import com.project.todo.config.MemberDetail;
+import com.project.todo.controller.MemberForm;
 import com.project.todo.domain.Member;
 import com.project.todo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +24,16 @@ public class MemberService implements UserDetailsService {
          return new MemberDetail(member);
     }
 
-    public Long save(Member member) {
+    public Long save(MemberForm form) {
         //validateDuplicateId(member);
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        form.setPassword(encoder.encode(form.getPassword()));
+
+        Member member = new Member(form.getId(), form.getPassword(), form.getNickname(), "USER");
+
         memberRepository.save(member);
+
         return member.getNo();
     }
 

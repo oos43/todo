@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -31,9 +29,9 @@ public class TodoController {
     @Autowired MemberRepository memberRepository;
     @Autowired TodoService todoService;
 
-    @GetMapping("/todo")
+    @GetMapping("/todolist")
     public String showTodo() {
-        return "view/todo";
+        return "view/todoList";
     }
 
     @PostMapping("/categories/new")
@@ -44,7 +42,7 @@ public class TodoController {
 
         Long categoryNo = todoService.saveCategory(category);
 
-        return "redirect:/todo";
+        return "redirect:/todolist";
     }
 
     @GetMapping("/todolist/new")
@@ -59,13 +57,13 @@ public class TodoController {
         model.addAttribute("todoForm", new TodoForm());
         model.addAttribute("categories", categories);
 
-        return "view/createTodo";
+        return "view/todoForm";
     }
 
     @PostMapping("/todolist/new")
     public String addTodo(@Valid TodoForm todoForm, BindingResult result) {
         if (result.hasErrors()) {
-            return "view/createTodo";
+            return "view/todoForm";
         }
 
         String dateString = todoForm.getDate();
@@ -80,9 +78,8 @@ public class TodoController {
         Todo todo = createTodo(todoForm.getContent(), date, loginUser, category);
         Long todoNo = todoService.saveTodo(todo);
 
-        return "redirect:/todo";
+        return "redirect:/todolist";
     }
-
 
     private Member getLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

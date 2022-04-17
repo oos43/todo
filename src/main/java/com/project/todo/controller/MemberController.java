@@ -17,16 +17,16 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/signUp")
+    @GetMapping("/members/new")
     public String showSignUpForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
-        return "view/signUp";
+        return "view/signUpForm";
     }
 
-    @PostMapping("/signUp")
+    @PostMapping("/members/new")
     public String signUp(@Valid MemberForm form, BindingResult result) {
         if (result.hasErrors()) {
-            return "view/signUp";
+            return "view/signUpForm";
         }
 
         Member member = new Member(form.getId(), form.getPassword(), form.getNickname(), "USER");

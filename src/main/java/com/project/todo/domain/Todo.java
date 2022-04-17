@@ -29,6 +29,8 @@ public class Todo {
     @JoinColumn(name = "category_no")
     private Category category;
 
+    public Todo() {}
+
     private Todo(String content, LocalDate date, TodoStatus status, Member member, Category category) {
         this.content = content;
         this.date = date;

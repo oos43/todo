@@ -30,7 +30,13 @@ public class TodoController {
     @Autowired TodoService todoService;
 
     @GetMapping("/todolist")
-    public String showTodo() {
+    public String showTodo(Model model) {
+        Long memberNo = getLoginUser().getNo();
+
+        List<Todo> todolist = todoService.findTodolist(memberNo);
+
+        model.addAttribute("todolist", todolist);
+
         return "views/todoList";
     }
 

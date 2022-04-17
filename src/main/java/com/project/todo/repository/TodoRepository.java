@@ -38,6 +38,12 @@ public class TodoRepository {
         em.persist(todo);
     }
 
+    public List<Todo> findTodolist(Long no) {
+        return em.createQuery("select t from Todo t where member_no = :no", Todo.class)
+                .setParameter("no", no)
+                .getResultList();
+    }
+
     public Todo findTodo(Long no) {
         return em.find(Todo.class, no);
     }

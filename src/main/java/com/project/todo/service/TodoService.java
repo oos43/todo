@@ -16,11 +16,6 @@ public class TodoService {
 
     private final TodoRepository todoRepository;
 
-    public Long saveTodo(Todo todo) {
-        todoRepository.saveTodo(todo);
-        return todo.getNo();
-    }
-
     public Long saveCategory(Category category) {
         todoRepository.saveCategory(category);
         return category.getNo();
@@ -32,5 +27,14 @@ public class TodoService {
 
     public Category findCategory(Long no) {
         return todoRepository.findCategory(no);
+    }
+
+    public Long saveTodo(Todo todo) {
+        todoRepository.saveTodo(todo);
+        return todo.getNo();
+    }
+
+    public List<Todo> findTodolist(Long memberNo) {
+        return todoRepository.findTodolist(memberNo);
     }
 }

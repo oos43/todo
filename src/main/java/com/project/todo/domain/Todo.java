@@ -5,8 +5,6 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-import static com.project.todo.domain.TodoStatus.Y;
-
 @Entity
 @Getter
 public class Todo {
@@ -29,18 +27,13 @@ public class Todo {
     @JoinColumn(name = "category_no")
     private Category category;
 
-    public Todo() {}
-
-    private Todo(String content, LocalDate date, TodoStatus status, Member member, Category category) {
-        this.content = content;
-        this.date = date;
-        this.status = status;
-        this.member = member;
-        this.category = category;
-    }
-
     public static Todo createTodo(String content, LocalDate date, Member member, Category category) {
-        Todo todo = new Todo(content, date, Y, member, category);
+        Todo todo = new Todo();
+        todo.content = content;
+        todo.date = date;
+        todo.member = member;
+        todo.category = category;
+
         return todo;
     }
 }

@@ -36,4 +36,13 @@ public class Member {
         this.auth = auth;
     }
 
+    public static Member createMember(String id, String password, String nickname, String auth) {
+        Member member = new Member();
+        member.id = id;
+        member.password = password;
+        member.nickname = nickname;
+        member.auth = auth;
+
+        return member;
+    }
 }

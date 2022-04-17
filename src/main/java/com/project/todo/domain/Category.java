@@ -18,15 +18,12 @@ public class Category {
     @JoinColumn(name = "member_no")
     private Member member;
 
-    public Category() {} //org.hibernate.InstantiationException: No default constructor for entity:  : Category
-
-    private Category(String name, Member member) {
-        this.name = name;
-        this.member = member;
-    }
 
     public static Category createCategory(String name, Member member) {
-        Category category = new Category(name, member);
+        Category category = new Category();
+        category.name = name;
+        category.member = member;
+
         return category;
     }
 }

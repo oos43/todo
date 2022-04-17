@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.project.todo.domain.Member.createMember;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,24 +27,23 @@ public class MemberService implements UserDetailsService {
     }
 
     public Long save(MemberForm form) {
-        //validateDuplicateId(member);
+        validateDuplicateId(form);
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         form.setPassword(encoder.encode(form.getPassword()));
 
-        Member member = new Member(form.getId(), form.getPassword(), form.getNickname(), "USER");
+        Member member = createMember(form.getId(), form.getPassword(), form.getNickname(), "USER");
 
         memberRepository.save(member);
 
         return member.getNo();
     }
 
-/*
-    private void validateDuplicateId(Member member) {
-        List<Member> findMembers = memberRepository.findById(member.getId());
-        if(!findMembers.isEmpty()) {
+    private void validateDuplicateId(MemberForm form) {
+        Member findMember = memberRepository.findById(form.getId());
+
+        if(findMember != null) {
             throw new IllegalStateException("이미 존재하는 아이디입니다.");
         }
     }
-*/
 }

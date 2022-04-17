@@ -31,7 +31,7 @@ public class TodoController {
 
     @GetMapping("/todolist")
     public String showTodo() {
-        return "view/todoList";
+        return "views/todoList";
     }
 
     @PostMapping("/categories/new")
@@ -57,13 +57,13 @@ public class TodoController {
         model.addAttribute("todoForm", new TodoForm());
         model.addAttribute("categories", categories);
 
-        return "view/todoForm";
+        return "views/todoForm";
     }
 
     @PostMapping("/todolist/new")
     public String addTodo(@Valid TodoForm todoForm, BindingResult result) {
         if (result.hasErrors()) {
-            return "view/todoForm";
+            return "views/todoForm";
         }
 
         String dateString = todoForm.getDate();

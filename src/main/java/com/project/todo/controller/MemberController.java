@@ -23,13 +23,13 @@ public class MemberController {
     @GetMapping("/members/new")
     public String showSignUpForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
-        return "view/signUpForm";
+        return "views/signUpForm";
     }
 
     @PostMapping("/members/new")
     public String signUp(@Valid MemberForm form, BindingResult result) {
         if (result.hasErrors()) {
-            return "view/signUpForm";
+            return "views/signUpForm";
         }
 
         Long memberNo = memberService.save(form);
@@ -39,7 +39,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "view/login";
+        return "views/login";
     }
 
     @GetMapping("/logout")

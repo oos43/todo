@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,6 +18,7 @@
 </head>
 
 <body>
+
 <header class="header-global">
     <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light">
         <div class="container">
@@ -30,10 +30,8 @@
                             <span class="nav-link-inner--text">ToDo</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="../examples/landing.html" class="dropdown-item">Landing</a>
-                            <a href="../examples/profile.html" class="dropdown-item">Profile</a>
-                            <a href="../examples/login.html" class="dropdown-item">Login</a>
-                            <a href="../examples/register.html" class="dropdown-item">Register</a>
+                            <a href="/todolist" class="dropdown-item">Todo List</a>
+                            <a href="/logout" class="dropdown-item">Log out</a>
                         </div>
                     </li>
                 </ul>
@@ -41,6 +39,7 @@
         </div>
     </nav>
 </header>
+
 <main>
     <section class="section section-shaped section-lg my-0">
         <div class="shape shape-style-1 bg-gradient-default">
@@ -146,6 +145,7 @@
         </div>
     </section>
 </main>
+
 <footer class="footer">
     <div class="container">
         <div class="row align-items-center justify-content-end">
@@ -176,14 +176,14 @@
             </div>
             <form action="/categories/new" method="post" role="form">
                 <div class="modal-body">
-                        <div class="form-group">
-                            <div class="input-group input-group-alternative mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                </div>
-                                <input class="form-control" placeholder="Category" type="text" name="name">
+                    <div class="form-group">
+                        <div class="input-group input-group-alternative mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                             </div>
+                            <input class="form-control" placeholder="Category" type="text" name="name">
                         </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -195,5 +195,4 @@
 </div>
 
 </body>
-
 </html>

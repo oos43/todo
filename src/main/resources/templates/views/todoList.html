@@ -89,11 +89,11 @@
                                 <tbody>
                                 <tr th:each="todo : ${todolist}">
                                     <td th:text="${todo.category.name}" th:if="${todo.status.name() == 'Y'}"></td>
-                                    <td th:text="${todo.category.name}" th:unless="${todo.status.name() == 'Y'}" style="color: gray"></td>
+                                    <td th:text="${todo.category.name}" th:unless="${todo.status.name() == 'Y'}" style="color: #d3d3d3"></td>
                                     <td th:text="${todo.content}" th:if="${todo.status.name() == 'Y'}"></td>
-                                    <td th:text="${todo.content}" th:unless="${todo.status.name() == 'Y'}" style="color: gray"></td>
+                                    <td th:text="${todo.content}" th:unless="${todo.status.name() == 'Y'}" style="color: #d3d3d3"></td>
                                     <td th:text="${todo.date}" th:if="${todo.status.name() == 'Y'}"></td>
-                                    <td th:text="${todo.date}" th:unless="${todo.status.name() == 'Y'}" style="color: gray"></td>
+                                    <td th:text="${todo.date}" th:unless="${todo.status.name() == 'Y'}" style="color: #d3d3d3"></td>
                                     <td>
                                         <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="check(this)" th:if="${todo.status.name() == 'Y'}">
                                         <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="check(this)" th:unless="${todo.status.name() == 'Y'}" disabled>

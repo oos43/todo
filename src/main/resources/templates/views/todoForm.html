@@ -16,6 +16,12 @@
     <!-- Docs CSS -->
     <link type="text/css" href="../assets/css/docs.min.css" rel="stylesheet">
 </head>
+<style>
+    .select-category {
+        border: none;
+        background-color: transparent;
+    }
+</style>
 
 <body>
 
@@ -62,12 +68,19 @@
                             </div>
 
                             <form action="/todolist/new" method="post" role="form" th:object="${todoForm}">
-
-                                    <select th:name="categoryNo">
-                                        <option th:each="val : ${categories}"
-                                                                        th:value="${val?.no}"
-                                                                        th:utext="${val?.name}"></option>
-                                    </select>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-bold-down"></i></span>
+                                        </div>
+                                        <select th:name="categoryNo" class="form-control">
+                                            <option>Category</option>
+                                            <option th:each="val : ${categories}"
+                                                    th:value="${val?.no}"
+                                                    th:utext="${val?.name}"></option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative mb-3">
                                         <div class="input-group-prepend">

@@ -15,6 +15,14 @@
     <link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
     <!-- Docs CSS -->
     <link type="text/css" href="../assets/css/docs.min.css" rel="stylesheet">
+
+    <style>
+    .button-area {
+        display: flex;
+        justify-content: end;
+    }
+
+    </style>
 </head>
 
 <body>
@@ -56,19 +64,18 @@
             <div class="justify-content-center">
                 <div class="card bg-secondary shadow">
                     <div class="card-body">
-                        <div>
-                            Todo List
+                        Todo List
+                        <div class="button-area">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="btn btn-neutral" data-toggle="modal"
+                                    data-target="#exampleModal">
                                 Create Category
                             </button>
-                            <a href="/todolist/new" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon">
-                                  <i class="fa fa-cloud-download mr-2"></i>
-                                </span>
-                                <span class="nav-link-inner--text">Create Todo</span>
-                            </a>
+                            <button onclick="location.href='/todolist/new'" class="btn btn-primary">
+                                Create Todo
+                            </button>
                         </div>
+                        <br>
                         <div class="text-center">
                             <table class="table">
                                 <thead>
@@ -76,13 +83,21 @@
                                     <th>Category</th>
                                     <th>Content</th>
                                     <th>Date</th>
+                                    <th>Done</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="todo : ${todolist}">
-                                    <td th:text="${todo.category.name}"></td>
-                                    <td th:text="${todo.content}"></td>
-                                    <td th:text="${todo.date}"></td>
+                                    <td th:text="${todo.category.name}" th:if="${todo.status.name() == 'Y'}"></td>
+                                    <td th:text="${todo.category.name}" th:unless="${todo.status.name() == 'Y'}" style="color: gray"></td>
+                                    <td th:text="${todo.content}" th:if="${todo.status.name() == 'Y'}"></td>
+                                    <td th:text="${todo.content}" th:unless="${todo.status.name() == 'Y'}" style="color: gray"></td>
+                                    <td th:text="${todo.date}" th:if="${todo.status.name() == 'Y'}"></td>
+                                    <td th:text="${todo.date}" th:unless="${todo.status.name() == 'Y'}" style="color: gray"></td>
+                                    <td>
+                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="check(this)" th:if="${todo.status.name() == 'Y'}">
+                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="check(this)" th:unless="${todo.status.name() == 'Y'}" disabled>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -113,7 +128,8 @@
 <script src="../assets/js/argon.js?v=1.0.0"></script>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -141,6 +157,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    function check(box) {
+
+        var todoNo = box.value;
+
+        console.log(todoNo);
+
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "/todolist/" + todoNo + "/done");
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function done(no) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/todolist/" + no + "/done");
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+</script>
 
 </body>
 </html>

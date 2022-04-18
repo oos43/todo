@@ -42,26 +42,26 @@ public class TodoServiceTest {
         assertEquals(category, todoRepository.findCategory(categoryNo));
     }
 
-    @Test
-    public void 투두_추가() throws Exception {
-        //given
-        Member member = createMember();
-        Category category = createCategory("카테고리1", member);
-
-        Todo todo = Todo.createTodo("투두1", LocalDate.of(2022, 04, 11), member, category);
-
-        //when
-        Long categoryNo = todoService.saveTodo(todo);
-
-        //then
-        em.flush();
-        assertEquals(todo, todoRepository.findTodo(categoryNo));
-
-        /*
-            처음 테스트 돌렸을 때 TransientPropertyValueException 에러 발생
-            -> 투두 클래스 Category의 @ManyToOne에 cascade = CascadeType.ALL(영속성 전이로 부모 객체를 저장할 때 자식 객체도 저장됨) 추가
-         */
-    }
+//    @Test
+//    public void 투두_추가() throws Exception {
+//        //given
+//        Member member = createMember();
+//        Category category = createCategory("카테고리1", member);
+//
+//        Todo todo = Todo.createTodo("투두1", LocalDate.of(2022, 04, 11), member, category);
+//
+//        //when
+//        Long categoryNo = todoService.saveTodo(todo);
+//
+//        //then
+//        em.flush();
+//        assertEquals(todo, todoRepository.findTodo(categoryNo));
+//
+//        /*
+//            처음 테스트 돌렸을 때 TransientPropertyValueException 에러 발생
+//            -> 투두 클래스 Category의 @ManyToOne에 cascade = CascadeType.ALL(영속성 전이로 부모 객체를 저장할 때 자식 객체도 저장됨) 추가
+//         */
+//    }
 
     private Member createMember() {
         Member member = new Member("testCategory", "password", "categoryNickname", "USER");

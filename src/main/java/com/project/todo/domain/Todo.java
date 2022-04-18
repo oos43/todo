@@ -27,13 +27,18 @@ public class Todo {
     @JoinColumn(name = "category_no")
     private Category category;
 
-    public static Todo createTodo(String content, LocalDate date, Member member, Category category) {
+    public static Todo createTodo(String content, LocalDate date, TodoStatus status, Member member, Category category) {
         Todo todo = new Todo();
         todo.content = content;
+        todo.status = status;
         todo.date = date;
         todo.member = member;
         todo.category = category;
 
         return todo;
+    }
+
+    public static void updateTodoStatus(Todo todo) {
+        todo.status = TodoStatus.N;
     }
 }

@@ -3,6 +3,7 @@ package com.project.todo.controller;
 import com.project.todo.domain.Category;
 import com.project.todo.domain.Member;
 import com.project.todo.domain.Todo;
+import com.project.todo.domain.TodoStatus;
 import com.project.todo.repository.MemberRepository;
 import com.project.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -81,8 +83,15 @@ public class TodoController {
         Long categoryNo = todoForm.getCategoryNo();
         Category category = todoService.findCategory(categoryNo);
 
-        Todo todo = createTodo(todoForm.getContent(), date, loginUser, category);
+        Todo todo = createTodo(todoForm.getContent(), date, TodoStatus.Y, loginUser, category);
         Long todoNo = todoService.saveTodo(todo);
+
+        return "redirect:/todolist";
+    }
+
+    @GetMapping("/todolist/{todoNo}/done")
+    public String updateTodo(@PathVariable("todoNo") Long todoNo) {
+        todoService.updateTodo(todoNo);
 
         return "redirect:/todolist";
     }

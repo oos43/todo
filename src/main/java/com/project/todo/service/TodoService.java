@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.project.todo.domain.Todo.updateTodoStatus;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -36,5 +38,10 @@ public class TodoService {
 
     public List<Todo> findTodolist(Long memberNo) {
         return todoRepository.findTodolist(memberNo);
+    }
+
+    public void updateTodo(Long todoNo) {
+        Todo findTodo = todoRepository.findTodo(todoNo);
+        updateTodoStatus(findTodo);
     }
 }

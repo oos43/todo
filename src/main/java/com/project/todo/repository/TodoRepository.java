@@ -45,7 +45,7 @@ public class TodoRepository {
     }
 
     public List<Todo> findTodolist(Long no) {
-        return em.createQuery("select t from Todo t where member_no = :no order by t.status desc", Todo.class)
+        return em.createQuery("select t from Todo t where member_no = :no order by t.status desc, t.date desc", Todo.class)
                 .setParameter("no", no)
                 .getResultList();
     }
@@ -59,6 +59,5 @@ public class TodoRepository {
                 .setParameter("no", no)
                 .setParameter("date", date)
                 .getResultList();
-//        Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())
     }
 }

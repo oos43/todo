@@ -4,9 +4,11 @@ import com.project.todo.domain.Category;
 import com.project.todo.domain.Todo;
 import com.project.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.project.todo.domain.Todo.updateTodoStatus;
@@ -43,5 +45,9 @@ public class TodoService {
     public void updateTodo(Long todoNo) {
         Todo findTodo = todoRepository.findTodo(todoNo);
         updateTodoStatus(findTodo);
+    }
+
+    public List<Todo> findTodolistByDate(Long no, LocalDate date) {
+        return todoRepository.findTodolistByDate(no, date);
     }
 }

@@ -96,6 +96,28 @@ public class TodoController {
         return "redirect:/todolist";
     }
 
+    @PostMapping("/todolist/date")
+    public String showTodoByDate(@RequestParam("date") String dateString, Model model) {
+//        int month = Integer.parseInt(dateString.substring(0, 2));
+//        int date = Integer.parseInt(dateString.substring(3, 5));
+//        int year = Integer.parseInt(dateString.substring(6));
+//        LocalDate todoDate = LocalDate.of(year, month, date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate todoDate = LocalDate.parse(dateString, formatter);
+//        LocalDate todoDate = LocalDate.parse(year + "-" + month + "-" + date, formatter);
+//        String todoDate = year + "-" + month + "-" + date;
+
+        Long memberNo = getLoginUser().getNo();
+        List<Todo> todolist = todoService.findTodolistByDate(memberNo, todoDate);
+        for(Todo todo : todolist) {
+            System.out.println(todo.getContent());
+        }
+
+        model.addAttribute("todolist", todolist);
+
+        return "views/todoList";
+    }
+
     private Member getLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String id = ((UserDetails) principal).getUsername();

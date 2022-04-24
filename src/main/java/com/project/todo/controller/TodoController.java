@@ -90,22 +90,32 @@ public class TodoController {
     }
 
     @GetMapping("/todolist/{todoNo}/completed")
-    public String updateTodoCompleted(@PathVariable("todoNo") Long todoNo) {
+    public String updateTodoCompleted(@PathVariable("todoNo") Long todoNo, @RequestParam(value="date", required=false) String dateString) {
         todoService.updateTodoCompleted(todoNo);
+
+        if (!dateString.equals("")) {
+            String date = getDate(dateString);
+            return "redirect:/todolist/" + date;
+        }
 
         return "redirect:/todolist";
     }
 
     @GetMapping("/todolist/{todoNo}/uncompleted")
-    public String updateTodoUncompleted(@PathVariable("todoNo") Long todoNo) {
+    public String updateTodoUncompleted(@PathVariable("todoNo") Long todoNo, @RequestParam(value="date", required=false) String dateString) {
         todoService.updateTodoUncompleted(todoNo);
+
+        if (!dateString.equals("")) {
+            String date = getDate(dateString);
+            return "redirect:/todolist/" + date;
+        }
 
         return "redirect:/todolist";
     }
 
-    @PostMapping("/todolist/date")
-    public String showTodoByDate(@RequestParam("date") String dateString, Model model) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    @GetMapping("/todolist/{date}")
+    public String showTodoByDate(@PathVariable("date") String dateString, Model model) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         LocalDate date = LocalDate.parse(dateString, formatter);
 
         Long memberNo = getLoginUser().getNo();
@@ -122,5 +132,13 @@ public class TodoController {
         String id = ((UserDetails) principal).getUsername();
 
         return memberRepository.findById(id);
+    }
+
+    private String getDate(String dateString) {
+        String year = dateString.substring(0, 4);
+        String month = dateString.substring(5, 7);
+        String day = dateString.substring(8);
+
+        return month + "-" + day + "-" + year;
     }
 }

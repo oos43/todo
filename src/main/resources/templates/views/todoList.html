@@ -85,7 +85,7 @@
                                                name="date" id="date">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary" id="dateBtn">
+                                <button type="button" class="btn btn-primary" id="dateBtn" onclick="selectDate()">
                                     <i class="ni ni-active-40"></i>
                                 </button>
                             </form>
@@ -192,12 +192,35 @@
 </div>
 
 <script>
+    function selectDate() {
+        var date = document.getElementById("date").value;
+        var changeDate = date.replace(/\//g, "-");
+        console.log(date);
+
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "/todolist/" + changeDate);
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    /*<![CDATA[*/
+      var todoDate = "[[${date}]]";
+    /*]]>*/
+
     function completed(box) {
         var todoNo = box.value;
 
         var form = document.createElement("form");
         form.setAttribute("method", "get");
         form.setAttribute("action", "/todolist/" + todoNo + "/completed");
+
+        if (todoDate != null) {
+            var input = document.createElement("input");
+            input.setAttribute("name", "date");
+            input.setAttribute("value", todoDate);
+            form.appendChild(input);
+        }
 
         document.body.appendChild(form);
         form.submit();
@@ -209,11 +232,17 @@
         var form = document.createElement("form");
         form.setAttribute("method", "get");
         form.setAttribute("action", "/todolist/" + todoNo + "/uncompleted");
+
+        if (todoDate != null) {
+            var input = document.createElement("input");
+            input.setAttribute("name", "date");
+            input.setAttribute("value", todoDate);
+            form.appendChild(input);
+        }
+
         document.body.appendChild(form);
         form.submit();
     }
-
 </script>
-
 </body>
 </html>

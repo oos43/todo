@@ -38,7 +38,11 @@ public class Todo {
         return todo;
     }
 
-    public static void updateTodoStatus(Todo todo) {
+    public static void updateTodoCompleted(Todo todo) {
         todo.status = TodoStatus.N;
+    }
+
+    public static void updateTodoUncompleted(Todo todo) {
+        todo.status = TodoStatus.Y;
     }
 }

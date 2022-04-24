@@ -120,8 +120,8 @@
                                     <td th:text="${todo.date}" th:if="${todo.status.name() == 'Y'}"></td>
                                     <td th:text="${todo.date}" th:unless="${todo.status.name() == 'Y'}" style="color: #d3d3d3"></td>
                                     <td>
-                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="check(this)" th:if="${todo.status.name() == 'Y'}">
-                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="check(this)" th:unless="${todo.status.name() == 'Y'}" disabled>
+                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="completed(this)" th:if="${todo.status.name() == 'Y'}">
+                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="uncompleted(this)" th:unless="${todo.status.name() == 'Y'}" checked>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -186,14 +186,26 @@
 </div>
 
 <script>
-    function check(box) {
+    function completed(box) {
         var todoNo = box.value;
 
         console.log(todoNo);
 
         var form = document.createElement("form");
         form.setAttribute("method", "get");
-        form.setAttribute("action", "/todolist/" + todoNo + "/done");
+        form.setAttribute("action", "/todolist/" + todoNo + "/completed");
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function uncompleted(box) {
+        var todoNo = box.value;
+
+        console.log(todoNo);
+
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "/todolist/" + todoNo + "/uncompleted");
         document.body.appendChild(form);
         form.submit();
     }

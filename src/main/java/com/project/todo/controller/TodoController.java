@@ -106,15 +106,13 @@ public class TodoController {
     @PostMapping("/todolist/date")
     public String showTodoByDate(@RequestParam("date") String dateString, Model model) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate todoDate = LocalDate.parse(dateString, formatter);
+        LocalDate date = LocalDate.parse(dateString, formatter);
 
         Long memberNo = getLoginUser().getNo();
-        List<Todo> todolist = todoService.findTodolistByDate(memberNo, todoDate);
-        for(Todo todo : todolist) {
-            System.out.println(todo.getContent());
-        }
+        List<Todo> todolist = todoService.findTodolistByDate(memberNo, date);
 
         model.addAttribute("todolist", todolist);
+        model.addAttribute("date", date);
 
         return "views/todoList";
     }

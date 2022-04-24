@@ -30,6 +30,7 @@
     #dateBtn {
         margin-top: 1px;
     }
+
     </style>
 </head>
 
@@ -74,21 +75,20 @@
                     <div class="card-body">
                         Todo List
                         <div class="button-area">
-                            <div class="date-area">
-                                <form action="/todolist/date" method="post">
-                                    <div class="form-group">
-                                        <div class="input-group input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                                            </div>
-                                            <input class="form-control datepicker" placeholder="Select date" type="text" name="date" id="date">
+                            <form action="/todolist/date" method="post" class="date-area">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                         </div>
+                                        <input class="form-control datepicker" placeholder="Select date" type="text"
+                                               name="date" id="date">
                                     </div>
-                                </form>
+                                </div>
                                 <button type="submit" class="btn btn-primary" id="dateBtn">
                                     <i class="ni ni-active-40"></i>
                                 </button>
-                            </div>
+                            </form>
                             <!-- Button trigger modal -->
                             <div>
                                 <button type="button" class="btn btn-neutral" data-toggle="modal"
@@ -114,14 +114,20 @@
                                 <tbody>
                                 <tr th:each="todo : ${todolist}">
                                     <td th:text="${todo.category.name}" th:if="${todo.status.name() == 'Y'}"></td>
-                                    <td th:text="${todo.category.name}" th:unless="${todo.status.name() == 'Y'}" style="color: #d3d3d3"></td>
+                                    <td th:text="${todo.category.name}" th:unless="${todo.status.name() == 'Y'}"
+                                        style="color: #d3d3d3"></td>
                                     <td th:text="${todo.content}" th:if="${todo.status.name() == 'Y'}"></td>
-                                    <td th:text="${todo.content}" th:unless="${todo.status.name() == 'Y'}" style="color: #d3d3d3"></td>
+                                    <td th:text="${todo.content}" th:unless="${todo.status.name() == 'Y'}"
+                                        style="color: #d3d3d3"></td>
                                     <td th:text="${todo.date}" th:if="${todo.status.name() == 'Y'}"></td>
-                                    <td th:text="${todo.date}" th:unless="${todo.status.name() == 'Y'}" style="color: #d3d3d3"></td>
+                                    <td th:text="${todo.date}" th:unless="${todo.status.name() == 'Y'}"
+                                        style="color: #d3d3d3"></td>
                                     <td>
-                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="completed(this)" th:if="${todo.status.name() == 'Y'}">
-                                        <input type="checkbox" name="todoNo" th:value="${todo.no}" onclick="uncompleted(this)" th:unless="${todo.status.name() == 'Y'}" checked>
+                                        <input type="checkbox" name="todoNo" th:value="${todo.no}"
+                                               onclick="completed(this)" th:if="${todo.status.name() == 'Y'}">
+                                        <input type="checkbox" name="todoNo" th:value="${todo.no}"
+                                               onclick="uncompleted(this)" th:unless="${todo.status.name() == 'Y'}"
+                                               checked>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -189,11 +195,10 @@
     function completed(box) {
         var todoNo = box.value;
 
-        console.log(todoNo);
-
         var form = document.createElement("form");
         form.setAttribute("method", "get");
         form.setAttribute("action", "/todolist/" + todoNo + "/completed");
+
         document.body.appendChild(form);
         form.submit();
     }
@@ -201,22 +206,9 @@
     function uncompleted(box) {
         var todoNo = box.value;
 
-        console.log(todoNo);
-
         var form = document.createElement("form");
         form.setAttribute("method", "get");
         form.setAttribute("action", "/todolist/" + todoNo + "/uncompleted");
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-    function selectDate() {
-        var date = document.getElementById("date").value;
-        console.log(date);
-
-        var form = document.createElement("form");
-        form.setAttribute("method", "get");
-        form.setAttribute("action", "/todolist/" + date);
         document.body.appendChild(form);
         form.submit();
     }
